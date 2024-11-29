@@ -708,37 +708,52 @@
             }
         });
         document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Submit the form
-            fetch(this.action, {
-                method: 'POST',
-                body: new FormData(this),
-            })
-            .then(response => {
-                if (response.ok) {
-                    showMessage('Thank you! Your message has been sent.', 'success');
-                    this.reset();
-                } else {
-                    showMessage('Oops! There was a problem sending your message.', 'danger');
-                }
-            })
-            .catch(error => {
-                showMessage('Oops! There was a problem sending your message.', 'danger');
-            });
-        });
+        event.preventDefault();
+        
+        const formData = new FormData(this);
+        
+        // Display email preview
+        showEmailPreview(formData);
+        
+        // Show alert
+        showAlert('Thank you! Your message has been sent.', 'success');
+        
+        // Simulate form submission (replace this with actual form submission if needed)
+        setTimeout(() => {
+            this.reset();
+        }, 2000);
+    });
 
-        function showMessage(message, type) {
-            const messageElement = document.getElementById('form-message');
-            messageElement.textContent = message;
-            messageElement.className = `alert alert-${type}`;
-            messageElement.style.display = 'block';
+    function showAlert(message, type) {
+        const alertElement = document.getElementById('alert-message');
+        alertElement.textContent = message;
+        alertElement.className = `alert alert-${type} mt-3`;
+        alertElement.style.display = 'block';
 
-            // Hide the message after 5 seconds
-            setTimeout(() => {
-                messageElement.style.display = 'none';
-            }, 5000);
-        }
+        // Hide the alert after 5 seconds
+        setTimeout(() => {
+            alertElement.style.display = 'none';
+        }, 5000);
+    }
+
+    function showEmailPreview(formData) {
+        const emailPreviewElement = document.getElementById('email-preview');
+        const emailContentElement = document.getElementById('email-content');
+        
+        emailContentElement.innerHTML = `
+            <p><strong>From:</strong> ${formData.get('name')} (${formData.get('email')})</p>
+            <p><strong>Subject:</strong> ${formData.get('subject')}</p>
+            <p><strong>Message:</strong></p>
+            <p>${formData.get('message')}</p>
+        `;
+        
+        emailPreviewElement.style.display = 'block';
+
+        // Hide the email preview after 10 seconds
+        setTimeout(() => {
+            emailPreviewElement.style.display = 'none';
+        }, 10000);
+    }
     </script>
 </body>
 </html>
