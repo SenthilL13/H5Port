@@ -566,44 +566,40 @@
     </section>
 
     <!-- Contact Section -->
-<section id="contact">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
-                <div class="card">
-                    <div class="card-body">
-                        <form id="contact-form" action="https://formsubmit.co/senthilnayagan100@gmail.com" method="POST">
-                            <div class="mb-3">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card">
+                        <div class="card-body">
+                            <form id="contact-form" action="https://formsubmit.co/senthilnayagan100@gmail.com" method="POST">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" placeholder="Subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-custom w-100">Send Message</button>
+                            </form>
+                            <div class="text-center mt-4">
+                                <p><i class="bi bi-envelope me-2"></i>senthilnayagan100@gmail.com</p>
+                                <p><i class="bi bi-phone me-2"></i>+91 9043522105</p>
+                                <p><i class="bi bi-geo-alt me-2"></i>Coimbatore, Tamil Nadu, India</p>
                             </div>
-                            <div class="mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-                            </div>
-                            <div class="mb-3">
-                                <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-custom w-100">Send Message</button>
-                        </form>
-                        <div id="alert-message" class="alert mt-3" style="display: none;" role="alert"></div>
-                        <div id="email-preview" class="mt-3" style="display: none;">
-                            <h4>Email Preview:</h4>
-                            <div id="email-content"></div>
-                        </div>
-                        <div class="text-center mt-4">
-                            <p><i class="bi bi-envelope me-2"></i>senthilnayagan100@gmail.com</p>
-                            <p><i class="bi bi-phone me-2"></i>+91 9043522105</p>
-                            <p><i class="bi bi-geo-alt me-2"></i>Coimbatore, Tamil Nadu, India</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-dark text-light py-4">
         <div class="container text-center">
@@ -711,52 +707,20 @@
             }
         });
         document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const formData = new FormData(this);
-        
-        // Display email preview
-        showEmailPreview(formData);
-        
-        // Show alert
-        showAlert('Thank you! Your message has been sent.', 'success');
-        
-        // Simulate form submission (replace this with actual form submission if needed)
-        setTimeout(() => {
+            event.preventDefault();
+            
+            // You can add additional client-side validation here if needed
+
+            // Submit the form
+            this.submit();
+
+            // Optional: Show a success message
+            alert('Thank you! Your message has been sent.');
+
+            // Optional: Clear the form
             this.reset();
-        }, 2000);
-    });
-
-    function showAlert(message, type) {
-        const alertElement = document.getElementById('alert-message');
-        alertElement.textContent = message;
-        alertElement.className = `alert alert-${type} mt-3`;
-        alertElement.style.display = 'block';
-
-        // Hide the alert after 5 seconds
-        setTimeout(() => {
-            alertElement.style.display = 'none';
-        }, 5000);
-    }
-
-    function showEmailPreview(formData) {
-        const emailPreviewElement = document.getElementById('email-preview');
-        const emailContentElement = document.getElementById('email-content');
-        
-        emailContentElement.innerHTML = `
-            <p><strong>From:</strong> ${formData.get('name')} (${formData.get('email')})</p>
-            <p><strong>Subject:</strong> ${formData.get('subject')}</p>
-            <p><strong>Message:</strong></p>
-            <p>${formData.get('message')}</p>
-        `;
-        
-        emailPreviewElement.style.display = 'block';
-
-        // Hide the email preview after 10 seconds
-        setTimeout(() => {
-            emailPreviewElement.style.display = 'none';
-        }, 10000);
-    }
+        });
     </script>
 </body>
 </html>
+
